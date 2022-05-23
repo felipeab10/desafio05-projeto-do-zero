@@ -61,7 +61,7 @@ export default function Post({ post }: PostProps): JSX.Element {
   return (
     <>
       <Head>
-        <title> {post.data.title}| Space Traveling</title>
+        <title> {RichText.asText(post.data.title)}| Space Traveling</title>
       </Head>
 
       {post.data.banner.url && (
@@ -72,7 +72,7 @@ export default function Post({ post }: PostProps): JSX.Element {
 
       <main className={commonStyles.container}>
         <article className={styles.post}>
-          <h1>{post.data.title}</h1>
+          <h1>{RichText.asText(post.data.title)}</h1>
           <div className={styles.postInfo}>
             <span>
               <FiCalendar size={20} color="#BBBBBB" />
@@ -81,7 +81,7 @@ export default function Post({ post }: PostProps): JSX.Element {
 
             <span>
               <FiUser size={20} color="#BBBBBB" />
-              {post.data.author}
+              {RichText.asText(post.data.author)}
             </span>
 
             <span>
@@ -101,18 +101,6 @@ export default function Post({ post }: PostProps): JSX.Element {
               </div>
             ))}
           </div>
-          {/*     <div className={styles.postContent}>
-            {post.data.content.map(({ heading, body }) => (
-              <div key={heading}>
-                {heading && <h2>{heading}</h2>}
-
-                <div
-                  className={styles.postSection}
-                  dangerouslySetInnerHTML={{ __html: RichText.asHtml(body) }}
-                />
-              </div>
-            ))}
-          </div> */}
         </article>
       </main>
     </>
@@ -134,7 +122,6 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
   const response = await prismic.getByUID('posts', String(slug), {
     // ref: previewData?.ref || null,
   });
-  console.log(response);
 
   const post: Post = {
     uid: response.uid,
@@ -146,10 +133,10 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
       }
     ),
     data: {
-      title: RichText.asText(response.data.title),
-      subtitle: RichText.asText(response.data.subtitle),
+      title: response.data.title,
+      subtitle: response.data.subtitle,
       banner: response.data.banner,
-      author: RichText.asText(response.data.author),
+      author: response.data.author,
       content: response.data.content,
     },
   };
