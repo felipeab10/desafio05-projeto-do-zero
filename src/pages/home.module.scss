@@ -6,13 +6,13 @@
 
   button{
     background: transparent;
-    margin-top: 3.5rem;
     border: none;
     outline: none;
     color: var(--highlight);
     font-size: 1.125rem;
     line-height: 1.2rem;
     transition: filter 0.2s;
+
     &:hover {
       filter: brightness(0.8);
     }
@@ -21,29 +21,36 @@
 }
 .post{
   max-width: 720px;
-  margin: 3rem auto 0;
+ // margin: 3rem auto 0;
+ padding-bottom: 20px;
+
+  a{
+   display: block;
+    margin-bottom: 3rem;
+  }
+
   h1{
     color: var(--heading);
     line-height: 2rem;
     font-size: 1.75rem;
     font-weight: 700;
-
     &:hover {
-      cursor: pointer;
       color: var(--highlight)
     }
+
   }
   p{
     color: #D7D7D7;
     font-size: 1.125rem;
-    line-height: 3rem;
+    line-height: 2rem;
     font-weight: 400;
   }
 
 }
 .footer{
   display: flex;
-  margin-top: 1rem;
+  margin-top: 0.600rem;
+
   span{
     svg {
       font-size: 1.1rem;
