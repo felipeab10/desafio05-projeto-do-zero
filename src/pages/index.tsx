@@ -80,7 +80,7 @@ export default function Home({
       <Head>
         <title>Home | SpaceTraveling Blog</title>
       </Head>
-      <main className={styles.container}>
+      <main className={commonStyles.container}>
         <section className={styles.post}>
           {posts &&
             posts?.map(post => (
@@ -146,18 +146,6 @@ export const getStaticProps: GetStaticProps = async ({
       },
     };
   });
-
-  /*  const posts = postsResponse.results.map(post => {
-    return {
-      uid: post.uid,
-      first_publication_date: post.first_publication_date,
-      data: {
-        title: post.data.title,
-        subtitle: post.data.subtitle,
-        author: post.data.author,
-      },
-    };
-  }); */
 
   return {
     props: {
