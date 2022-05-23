@@ -57,11 +57,13 @@ export default function Post({ post }: PostProps): JSX.Element {
   const readingTime = Math.ceil(
     (amountWordsOfBody + amountWordsOfHeading) / 200
   );
+  const { title } = post.data;
+  const { author } = post.data;
 
   return (
     <>
       <Head>
-        <title> {RichText.asText(post.data.title)}| Space Traveling</title>
+        <title> {title}| Space Traveling</title>
       </Head>
 
       {post.data.banner.url && (
@@ -72,7 +74,7 @@ export default function Post({ post }: PostProps): JSX.Element {
 
       <main className={commonStyles.container}>
         <article className={styles.post}>
-          <h1>{RichText.asText(post.data.title)}</h1>
+          <h1>{title}</h1>
           <div className={styles.postInfo}>
             <span>
               <FiCalendar size={20} color="#BBBBBB" />
@@ -81,7 +83,7 @@ export default function Post({ post }: PostProps): JSX.Element {
 
             <span>
               <FiUser size={20} color="#BBBBBB" />
-              {RichText.asText(post.data.author)}
+              {author}
             </span>
 
             <span>
@@ -144,10 +146,10 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
       }
     ),
     data: {
-      title: response.data.title,
+      title: RichText.asText(response.data.title),
       subtitle: response.data.subtitle,
       banner: response.data.banner,
-      author: response.data.author,
+      author: RichText.asText(response.data.author),
       content: response.data.content,
     },
   };
